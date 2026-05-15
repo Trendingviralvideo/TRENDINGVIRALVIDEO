@@ -4,24 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trending Viral Video</title>
-    <!-- Kumukuha ng modernong font mula sa Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         /* CSS para sa Aesthetic na Design */
         body {
             font-family: 'Poppins', sans-serif;
             display: flex;
-            flex-direction: column; 
-            justify-content: space-between; 
-            align-items: center;
-            min-height: 100vh;
+            justify-content: center; 
+            align-items: center; /* Nilalagay ang login box sa saktong gitna */
+            height: 100vh; /* Para sa lumang browsers */
+            height: 100dvh; /* Dynamic height para hindi tabunan ng mobile browser bar */
             margin: 0;
+            overflow: hidden; /* Ito ang nagtatanggal ng scroll function */
             background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
-            background-attachment: fixed;
         }
 
+        /* Title na naka-lock sa taas */
         .main-title {
-            margin-top: 50px;
+            position: absolute;
+            top: 50px; /* Distansya mula sa pinakataas ng screen */
             color: #ffffff;
             font-size: 32px;
             font-weight: 600;
@@ -29,6 +30,8 @@
             text-transform: uppercase;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
             text-align: center;
+            width: 100%;
+            margin: 0;
         }
 
         .login-container {
@@ -96,22 +99,25 @@
             margin-top: 20px;
         }
 
+        /* Footer na naka-lock sa baba */
         .footer {
-            margin-bottom: 20px;
+            position: absolute;
+            bottom: 20px; /* Distansya mula sa pinakababa ng screen */
             color: #555;
             font-size: 12px;
             font-weight: 400;
             text-align: center;
             opacity: 0.8;
+            width: 100%;
+            margin: 0;
         }
     </style>
 </head>
 <body>
 
-    <h1 class="main-title">Trending Viral Video</h1>
+    <h1 class="main-title">Trending Viral<br>Video</h1>
 
     <div class="login-container">
-        <!-- Nilagyan ng onfocus at onclick para ma-clear ang text at placeholder kapag pinindot -->
         <input type="text" id="userId" placeholder="Enter ID to Watch" 
                onfocus="this.placeholder = ''; this.value = '';" 
                onblur="this.placeholder = 'Enter ID to Watch'">
@@ -130,23 +136,15 @@
         var idInput = document.getElementById('userId').value;
         var errorMessage = document.getElementById('error-message');
 
-        // ==========================================
-        // DITO MO ILALAGAY ANG MGA ID AT LINKS MO
-        // Format: 'YUNG_ID_NA_ITATYPE': 'YUNG_LINK_NA_PUPUNTAHAN',
-        // ==========================================
         var idDatabase = {
             'James': 'https://www.google.com',
             'Video01': 'https://www.youtube.com',
             'SecretID': 'https://www.tiktok.com'
-            // Kung gusto mo magdagdag, lagyan mo lang ng comma (,) yung huli at idagdag ang bago sa ilalim
         };
 
-        // I-check kung ang tinype na ID ay nasa listahan (idDatabase)
         if (idDatabase.hasOwnProperty(idInput)) {
-            // Kapag tama ang ID, kunin ang link na naka-assign dito at i-redirect
             window.location.href = idDatabase[idInput];
         } else {
-            // Kapag mali o wala sa listahan ang ID
             errorMessage.style.display = 'block';
         }
     }
